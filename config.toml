@@ -17,3 +17,6 @@ languageCode = "en-us"
   title = "Code"
   url = "https://github.com/odilia-app"
   weight =  -100
+
+[outputs]
+    home = ["HTML", "RSS", "JSON"]
