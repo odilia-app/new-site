@@ -1,17 +1,29 @@
 <nav class="global-nav">
-    <ul class="nav-list">
-        {{- $currentPage := . -}}
+  <ul class="nav-list" style="display: flex; justify-content: space-between; width: 100%; padding: 0; margin: 0; position: relative;">
+    {{- $currentPage := . -}}
 
-        {{- range .Site.Menus.main }}
-        <li class="nav-item">
-          <a href="{{ .URL }}"
-            class="nav-link
-            {{- if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="true" {{- else -}} " {{- end -}}>
-            {{- .Pre }}
-            {{ .Title }}
-            {{- .Post -}}
+    {{- range .Site.Menus.main }}
+    <li class="nav-item" style="list-style: none;">
+      <a href="{{ .URL }}" class="nav-link
+             {{- if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active"
+        aria-current="true" {{- else -}} " {{- end -}}>
+              {{- .Pre }}
+              {{ .Title }}
+              {{- .Post -}}
           </a>
-        </li>
-        {{ end -}}
+      </li>
+      {{ end -}}
+      
+      <li class="nav-item" style="list-style: none; margin-left: auto;">
+          <input id="search-query" placeholder="Search" oninput="performSearch(this.value)" />
+      </li>
+      
+      <div id="search-results" style="background-color: black; color: white; position: absolute; top: 100%; right: 0; width: fit-content; z-index: 9999; padding: 10px; border-radius: 5px; display: none; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); outline: 1px solid white;">
+        <ul style="list-style: none; margin: 0; padding: 0; text-align: right;">
+        </ul>
+      </div>
+
     </ul>
 </nav>
+
+<script defer src="/js/search.js"></script>
