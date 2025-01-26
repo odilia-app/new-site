@@ -1,6 +1,6 @@
 ---
 title: "Home"
-date: 2022-01-06t20:53:58z
+date: 2022-01-06
 draft: false
 menu:
   main:

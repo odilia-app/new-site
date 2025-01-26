@@ -1,17 +1,37 @@
 <nav class="global-nav">
-    <ul class="nav-list">
-        {{- $currentPage := . -}}
+  <ul class="nav-list"
+    style="display: flex; justify-content: space-between; width: 100%; padding: 0; margin: 0; position: relative;">
+    {{- $currentPage := . -}}
 
-        {{- range .Site.Menus.main }}
-        <li class="nav-item">
-          <a href="{{ .URL }}"
-            class="nav-link
-            {{- if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active" aria-current="true" {{- else -}} " {{- end -}}>
-            {{- .Pre }}
-            {{ .Title }}
-            {{- .Post -}}
+    {{- range .Site.Menus.main }}
+    <li class="nav-item" style="list-style: none;">
+      <a href="{{ .URL }}" class="nav-link
+             {{- if or ($currentPage.IsMenuCurrent " main" .) ($currentPage.HasMenuCurrent "main" .) }} active"
+        aria-current="true" {{- else -}} " {{- end -}}>
+              {{- .Pre }}
+              {{ .Title }}
+              {{- .Post -}}
           </a>
-        </li>
-        {{ end -}}
-    </ul>
+      </li>
+      {{ end -}}
+      
+      <!-- Search input with label -->
+      <form class="nav-item" style="list-style: none; margin-left: auto;" onsubmit="event.preventDefault(); navigateToSearch(this.query.value);">
+        <label for="search-query" class="sr-only">Search the site</label>
+        <input id="search-query" 
+               name="query" 
+               placeholder="Search" 
+               aria-label="Search field" />
+        <button type="submit" style="display: none;">Search</button>
+      </form>
+  </ul>
 </nav>
+
+<script>
+  function navigateToSearch(query) {
+    if (query.trim()) {
+      const encodedQuery = encodeURIComponent(query);
+      window.location.href = `/search?query=${encodedQuery}`;
+    }
+  }
+</script>
