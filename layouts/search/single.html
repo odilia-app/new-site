@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <div class="search-results">
+    <h1>Search Results</h1>
+    {{ $query := .Request.Params.query }}
+    {{ if $query }}
+      <p>Showing results for: <strong>{{ $query }}</strong></p>
+      <ul>
+        {{ range $page := where .Site.Pages "Content" "intersect" (split $query " ") }}
+          <li>
+            <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+            <p>{{ $page.Summary }}</p>
+          </li>
+        {{ else }}
+          <li>No results found.</li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p>Please enter a search query.</p>
+    {{ end }}
+  </div>
+{{ end }}
