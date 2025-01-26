@@ -1,0 +1,22 @@
+{{ define "main" }}
+  <h1> Search Results </h1>
+  <div class="search-results">
+    <!-- This div will be populated by the search results -->
+  </div>
+{{ end }}
+
+<script src="/search.js"></script>
+
+<script>
+  // Wait for the page to load
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get the query parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
+
+    // If a query exists, call the performSearch function
+    if (query) {
+      performSearch(query);
+    }
+  });
+</script>
